@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+    
+    <script type="text/javascript" src="Document Object Model Basics.js"></script>
+    <script>
+
+        function toggleElement() {
+                const element = document.getElementById("myElement");
+                    
+                    if (element.style.display === "none") {
+                                element.style.display = "block";  // Show the element if it's hidden
+                    } else {
+                                element.style.display = "none";  // Hide the element if it's visible
+                    }   
+        }
+    </script>
+</head>
+<body>
+    <button onclick="toggleElement()">Toggle Element</button>
+    <div id="myElement" style="display:none;">
+        This is a toggleable element!
+    </div>
+</body>
+</html>

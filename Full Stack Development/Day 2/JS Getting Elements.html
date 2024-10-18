@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="myForm" action="">
+        <label for="uname">Name: </label>
+        <input id="myInput" name="uname" type="text" />
+        <input type="button" value="submit" onclick="displayOp()" /> 
+    </form> <br><br>
+    
+    
+    <button onclick="promptUser()">Click Me </button><br><br>
+
+    <h2>Enter a Day of the Week</h2>
+        <form id="dayForm" action="javascript:void(0);">
+            <label for="dayInput">Day: </label>
+            <input id="dayInput" name="day" type="text" placeholder="e.g., Monday" />
+            <input type="button" value="Check" onclick="checkDay()" />
+        </form>
+        <p id="result"></p>
+    <h2>Calculator</h2>
+        <form id="CalculatorForm" action="javascript:void(0);">
+            <label for="num1Input">Num 1: </label>
+            <input id="num1Input" name="num1" type="number" placeholder="e.g., 12" /><br><br>
+            <label for="num2Input">Num 2: </label>
+            <input id="num2Input" name="num2" type="number" placeholder="e.g., 12" /><br><br>
+            <label for="opsInput">Operation</label>
+            <input id="opsInput" name="ops" type="text" placeholder="e.g., +" /><br><br>
+            <input type="button" value="Check" onclick="caculate()" /><br>
+        </form>
+        <p id="result1"></p>
+    <script>
+        function displayOp(){
+            const uname = document.getElementById("myInput").value;
+                console.log(uname);
+        }
+
+
+        function promptUser(){
+            const uname = prompt("Enter your name: ");
+            alert("The username is: "+ uname);
+        }
+
+
+        function checkDay() {
+            const day = document.getElementById("dayInput").value.toLowerCase();
+            let message;
+
+            switch(day) {
+                case 'monday':
+                    message = "Start of the week!";
+                    break;
+                case 'tuesday':
+                    message = "Beginning of the week!";
+                    break;
+                case 'wednesday':
+                case 'thursday':
+                    message = "Mid of the week!";
+                    break;
+                case 'friday':
+                    message = "End of the week!";
+                    break;
+                case 'saturday':
+                case 'sunday':
+                    message = "It's the weekend!";
+                    break;
+                default:
+                    message = "Please enter a valid day (e.g., Monday, Tuesday, etc.).";
+            }
+
+            document.getElementById("result").textContent = message;
+        }
+
+
+        function caculate() {
+            const ops = document.getElementById("opsInput").value;
+            const Num1 = parseFloat(document.getElementById("num1Input").value);
+            const Num2 = parseFloat(document.getElementById("num2Input").value);
+            let val;
+
+            switch(ops) {
+                case '+':
+                    val = Num1 + Num2;
+                    break;
+                case '-':
+                    val = Num1 - Num2;
+                    break;
+                case '*':
+                    val = Num1 * Num2;
+                    break;
+                case '/':
+                    val = Num1 / Num2;
+                    break;
+                default:
+                    val = "Please enter a valid operation (e.g., +, -, etc.).";
+            }
+
+            document.getElementById("result1").textContent = val;
+        }
+    </script>
+</body>
+</html>
