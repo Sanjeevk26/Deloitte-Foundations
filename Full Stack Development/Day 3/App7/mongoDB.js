@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
+const User = require('./Users');
 const mongoose = require('mongoose');
+
 const port = 3000;
 
 app.use(express.json());
 
-const mongURI = "mongodb+srv://sanjeev26khatwani:**********@cluster0.mf5sp.mongodb.net/TestDb";
+const mongURI = "mongodb+srv://sanjeev26khatwani:LYqm2BHhEHQrAA36@cluster0.mf5sp.mongodb.net/TestDb?retrywrites=true&w=majority";
 
 // Connect to MongoDB
 mongoose.connect(mongURI, {
@@ -20,22 +22,48 @@ app.get('/', (req, res) => {
     });            
 
     // Start the server
-// Define a schema (for demonstration)
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    age: Number
+
+/*const userSchema = new mongoose.Schema({
+        name: {
+            type: String,
+            required: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        age: Number
+    });
+    
+    // Create a model based on the schema
+const User = mongoose.model('User', userSchema);*/
+app.get('/api/users', async(req,res)=>{
+    try{
+        const users = await User.find();
+        res.json(users);
+    }catch(err){
+        res.status(500).send(err);
+    }
 });
 
-// Create a model based on the schema
-const User = mongoose.model('User', userSchema);
+
+app.post('/api/users', async(req,res)=>{
+    try{
+        const userData = req.body;
+        const user = await User.create(userData);
+        res.status(201).json(user);
+    }catch(err){
+        res.status(500).send(err);
+    }
+});
 
 // Example function to create a new user
-async function createUser() {
+/*async function createUser() {
     const user = new User({
-        name: 'John Doe',
-        email: 'john@example.com',
-        age: 30
+        name: 'Sanjeev',
+        email: 'Sk@example.com',
+        age: 25
     });
 
     const result = await user.save();
@@ -43,7 +71,7 @@ async function createUser() {
 }
 
 // Call the function to create a user (optional)
-createUser();
+createUser();*/
 
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
