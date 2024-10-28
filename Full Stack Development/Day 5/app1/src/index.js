@@ -1,10 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Home from './Pages/Home';
 import reportWebVitals from './reportWebVitals';
 
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Components/Layout';
+import Page404 from './Pages/Page404';
+import AddProduct from './Pages/AddProduct';
+ 
+ const routes = createBrowserRouter([
+    {
+        element: <Layout />,
+            errorElement: <Page404 />,
+            children: [
+          {path:'/', element:<Home />},
+          {path: 'addProduct', element:<AddProduct /> }
+        ]
+      }
+    ]);
+
+              
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
